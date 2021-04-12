@@ -11,6 +11,7 @@ const mapLines = (propss: SVGProps<SVGLineElement>[] | null) =>
         (props) => (
             <line
                 key={`${props.x1}${props.y1}${props.x2}${props.y2}`}
+                strokeLinecap='round'
                 {...props}
             />
         ),
@@ -48,8 +49,17 @@ export const Fourierite: React.FC<Props> = ({ revolutions, steps }) => {
     )
 
     return (
-        <svg width='100%' height='100%'>
-            <g transform='translate(400 400)'>{rendered}</g>
+        <svg viewBox='-100 -100 200 200' style={{ background: 'black' }}>
+            <mask id='mask'>
+                <g transform='translate(0, -20) rotate(90)'>{rendered}</g>
+            </mask>
+            <defs>
+                <linearGradient id='gradient' gradientTransform='rotate(60)'>
+                    <stop offset='0%' stop-color='#2595B8' />
+                    <stop offset='100%' stop-color='#6AA63A' />
+                </linearGradient>
+            </defs>
+            <circle r='100' mask='url(#mask)' fill='url(#gradient)' />
         </svg>
     )
 }

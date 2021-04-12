@@ -6,39 +6,55 @@ import { Revolution } from './generative/fourierite/types'
 
 const circles: Revolution[] = [
     {
-        radius: 200,
+        radius: 30,
         frequency: 1,
-        trunk: () => ({ stroke: 'red', opacity: 0.2 }),
-        branch: () => ({ stroke: 'red', opacity: 0.1 }),
-        node: () => ({ fill: 'pink', opacity: 0.5 }),
+        trunk: () => ({ stroke: 'hsl(0, 0%, 20%)' }),
+        branch: () => ({ stroke: 'hsl(0, 0%, 30%)' }),
     },
     {
-        radius: 50,
-        frequency: 12,
-        trunk: () => ({ stroke: 'red', opacity: 0.5 }),
-        branch: () => ({ stroke: 'red', opacity: 0.5 }),
-        node: () => ({ fill: 'pink', r: 2, opacity: 0.1 }),
+        radius: 10,
+        frequency: -2,
+        trunk: () => ({ stroke: 'hsl(0, 0%, 30%)' }),
+        branch: () => ({ stroke: 'hsl(0, 0%, 40%)' }),
     },
     {
-        radius: 12,
-        frequency: 120,
-        trunk: () => ({ stroke: 'red', opacity: 0.1 }),
-        branch: () => ({ stroke: 'red', opacity: 0.5 }),
-        node: () => ({ fill: 'pink', r: 2, opacity: 0.5 }),
+        radius: 10,
+        frequency: -3,
+        trunk: () => ({ stroke: 'hsl(0, 0%, 40%)' }),
+        branch: () => ({ stroke: 'hsl(0, 0%, 50%)' }),
     },
     {
-        radius: 50,
-        frequency: 54,
-        trunk: () => ({ stroke: 'red', opacity: 0.1 }),
-        branch: () => ({ stroke: 'red', opacity: 0.5 }),
-        node: () => ({ fill: 'pink', r: 2, opacity: 0.5 }),
+        radius: 20,
+        frequency: 2,
+        trunk: () => ({ stroke: 'hsl(0, 0%, 50%)' }),
+        branch: () => ({ stroke: 'hsl(0, 0%, 60%)' }),
     },
     {
-        radius: 120,
-        frequency: 165,
-        trunk: () => ({ stroke: 'red', opacity: 0.1 }),
-        branch: () => ({ stroke: 'red', opacity: 0.1 }),
-        node: () => ({ fill: 'pink', r: 2, opacity: 0.5 }),
+        radius: 20,
+        frequency: 1,
+        branch: () => ({ stroke: 'hsl(0, 0%, 70%)' }),
+        node: ({ time }) => ({
+            fill: 'hsl(0, 0%, 70%)',
+            r: 1 - Math.abs(time - 0.5),
+        }),
+    },
+    {
+        radius: 8,
+        frequency: 0,
+        branch: () => ({ stroke: 'hsl(0, 0%, 80%)' }),
+        node: ({ time }) => ({
+            fill: 'hsl(0, 0%, 80%)',
+            r: Math.abs((time - 0.5) * 3),
+        }),
+    },
+    {
+        radius: 8,
+        frequency: 0,
+        branch: () => ({ stroke: 'hsl(0, 0%, 70%)' }),
+        node: ({ time }) => ({
+            stroke: 'hsl(0, 0%, 70%)',
+            r: Math.abs((time - 0.5) * 3),
+        }),
     },
 ]
 
@@ -46,7 +62,7 @@ export const Routes: React.FC = () => (
     <>
         <Route path='/fourierite'>
             <Fullscreen>
-                <Fourierite revolutions={circles} steps={80} />
+                <Fourierite revolutions={circles} steps={120} />
             </Fullscreen>
         </Route>
     </>
